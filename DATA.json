@@ -1,0 +1,16 @@
+{
+    "users": [
+        {
+            "Name": "sai",
+            "Age": 21,
+            "Gender": "F",
+            "Disease": "(vertigo) Paroymsal  Positional Vertigo",
+            "Sympts": [
+                "vomiting",
+                "vomiting",
+                "headache",
+                "unsteadiness"
+            ]
+        }
+    ]
+}

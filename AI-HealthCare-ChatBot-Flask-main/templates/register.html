@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+                background-image: url("../static/styles/pic13.png") !important;
+                background-size: cover !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+                background-attachment: fixed !important; /* Optional: keeps the image fixed */
+}
+        .register-container {
+            width: 300px;
+            position: absolute;
+            right: 50px; /* Distance from right edge */
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+}
+
+    
+        #username, #password {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    
+        .register-btn {
+            width: 100%;
+            padding: 10px 20px;
+            margin: 10px 0;
+            font-size: 18px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    
+        .register-btn:hover {
+            background-color: #45a049;
+        }
+    
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            display: none;
+        }
+    
+        /* Success message style */
+        #successMessage {
+            display: none;
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h1>Medical Bot Registration</h1>
+        <!-- Form for registration -->
+        <form id="registrationForm" action="/register" method="POST">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <div class="error-message" id="usernameError">Please enter a username</div>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+            <div class="error-message" id="passwordError">Please enter a password</div>
+            <input type="submit" class="register-btn" value="Register">
+        </form>
+        <!-- Success message section -->
+        <div id="successMessage">
+            Registration successful!
+        </div>
+    </div>
+
+    <!-- Flashed message display -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- JavaScript for form submission handling -->
+    <script>
+        $(document).ready(function() {
+            $('#registrationForm').submit(function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                var username = $('#username').val().trim();
+                var password = $('#password').val().trim();
+                
+                // Validate username and password fields
+                if (username === '') {
+                    $('#usernameError').show();
+                    return;
+                } else {
+                    $('#usernameError').hide();
+                }
+                
+                if (password === '') {
+                    $('#passwordError').show();
+                    return;
+                } else {
+                    $('#passwordError').hide();
+                }
+                
+                // If validation passes, submit the form via AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: '/register',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#successMessage').show(); // Show success message
+                        window.location.href = "/login"; // Redirect to login page
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        // Handle error if registration fails
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

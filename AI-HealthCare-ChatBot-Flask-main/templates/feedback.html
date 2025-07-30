@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthChat Feedback</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .feedback-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: #0A6EB4;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .rating-group {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .rating-option {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .rating-option input[type="radio"] {
+            display: none;
+        }
+
+        .rating-option label {
+            display: block;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .rating-option label:hover {
+            background: #f0f8ff;
+        }
+
+        .rating-option input[type="radio"]:checked + label {
+            background: #e3f2fd;
+            color: #0A6EB4;
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        textarea:focus, select:focus {
+            outline: none;
+            border-color: #0A6EB4;
+            box-shadow: 0 0 0 2px rgba(10, 110, 180, 0.1);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: #0A6EB4;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #085890;
+        }
+
+        .thank-you {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .thank-you h2 {
+            color: #0A6EB4;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .thank-you p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+                padding: 10px;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .rating-option {
+                min-width: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="feedback-card">
+            <div class="card-header">
+                <h1>Your Feedback Matters</h1>
+                <p>Help us improve your healthcare experience</p>
+            </div>
+            <div class="card-body">
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label>How was your experience with HealthChat?</label>
+                        <div class="rating-group">
+                            <div class="rating-option">
+                                <input type="radio" id="rating5" name="rating" value="5" required>
+                                <label for="rating5">
+                                    <div class="emoji">😍</div>
+                                    <div>Excellent</div>
+                                </label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating4" name="rating" value="4">
+                                <label for="rating4">
+                                    <div class="emoji">😊</div>
+                                    <div>Good</div>
+                                </label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating3" name="rating" value="3">
+                                <label for="rating3">
+                                    <div class="emoji">😐</div>
+                                    <div>Okay</div>
+                                </label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating2" name="rating" value="2">
+                                <label for="rating2">
+                                    <div class="emoji">😕</div>
+                                    <div>Fair</div>
+                                </label>
+                            </div>
+                            <div class="rating-option">
+                                <input type="radio" id="rating1" name="rating" value="1">
+                                <label for="rating1">
+                                    <div class="emoji">😟</div>
+                                    <div>Poor</div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="feedbackType">What aspect would you like to comment on?</label>
+                        <select id="feedbackType" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="accuracy">Response Accuracy</option>
+                            <option value="helpfulness">Helpfulness</option>
+                            <option value="understanding">Understanding</option>
+                            <option value="speed">Response Speed</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments">Additional Comments (Optional)</label>
+                        <textarea id="comments" placeholder="Please share your thoughts..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Submit Feedback</button>
+                </form>
+
+                <div class="thank-you" id="thankYouMessage">
+                    <h2>Thank You for Your Feedback!</h2>
+                    <p>Your input helps us improve our service and provide better healthcare support.</p>
+                    <button class="btn" onclick="resetForm()">Submit Another Response</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'block';
+        });
+
+        function resetForm() {
+            document.getElementById('feedbackForm').reset();
+            document.getElementById('feedbackForm').style.display = 'block';
+            document.getElementById('thankYouMessage').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

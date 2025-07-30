@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, #8f94fb, #4e54c8);
+  font-family: 'Montserrat', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.panel-container {
+  background: #1e215d;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 350px;
+  text-align: center;
+  color: #d1d5ff;
+  transition: all 0.3s ease;
+}
+
+.panel-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.panel-container strong {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  display: block;
+  line-height: 1.4;
+}
+
+.ratings-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0;
+}
+
+.rating {
+  flex: 1;
+  margin: 0 8px;
+  padding: 15px;
+  border-radius: 10px;
+  background: #2e3270;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.rating:hover,
+.rating.active {
+  background: #4e54c8;
+  box-shadow: 0 0 12px rgba(143, 148, 251, 0.5);
+  transform: scale(1.05);
+}
+
+.rating img {
+  width: 45px;
+  margin-bottom: 10px;
+}
+
+.rating small {
+  color: #d1d5ff;
+  font-size: 0.9rem;
+}
+
+.rating:hover small,
+.rating.active small {
+  color: #ffffff;
+}
+
+.btn {
+  background: linear-gradient(90deg, #8f94fb, #4e54c8);
+  color: #fff;
+  font-weight: 600;
+  padding: 14px 35px;
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #4e54c8, #8f94fb);
+  transform: translateY(-2px);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.fa-heart {
+  color: #ff4b5c;
+  font-size: 32px;
+  margin-bottom: 12px;
+  animation: heartbeat 1.5s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.credit {
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: #d1d5ff;
+}
+
+.credit a {
+  color: #8f94fb;
+  text-decoration: none;
+}
+
+.credit a:hover {
+  text-decoration: underline;
+}

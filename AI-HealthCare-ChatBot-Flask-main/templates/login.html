@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../static/styles/pic13.png') no-repeat center center/cover;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .login-container {
+      position: absolute;
+      right: 50px; /* Distance from right edge */
+      /*transform: translateY(-50%);*/
+      background: rgba(255, 255, 255, 0.361);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding:20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      text-align: center;
+      width: 320px;
+      color: #fff;
+      transition: transform 0.3s;
+    }
+
+    .login-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .login-container h1 {
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: #d1d5ff;
+      text-align: left;
+    }
+
+    #username, #password {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    #username::placeholder, #password::placeholder {
+      color: #ddd;
+    }
+
+    #username:focus, #password:focus {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #8f94fb, #4e54c8);
+      border: none;
+      border-radius: 30px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.4s, transform 0.2s;
+    }
+
+    .login-btn:hover {
+      background: linear-gradient(90deg, #4e54c8, #8f94fb);
+      transform: translateY(-2px);
+    }
+
+    .error-message {
+      margin-top: 20px;
+      color: #ff4b5c;
+      font-weight: bold;
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm" action="/login" method="POST">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" placeholder="Enter username">
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter password">
+
+      <input type="submit" class="login-btn" value="Submit">
+    </form>
+
+    {% if status == True %}
+      <div class="error-message">Invalid Credentials</div>
+    {% endif %}
+    
+  </div>
+
+</body>
+</html>
